@@ -7,14 +7,36 @@ import ReactDOM from 'react-dom';
   console.log(typeof el); // object
 */
 
-const el = (
-<div>
-  <h1>My Todo List</h1>
-  <input placeholder="search"/>
-  <ul>
+// Create components
+const TodoList = () => {
+  return (
+    <ul>
     <li>Learn React</li>
     <li>Build Awesome App</li>
   </ul>
-</div>);
+  );
+};
 
-ReactDOM.render(el, document.getElementById('root'));
+const AppHeader = () => {
+  return (
+    <h1>My Todo List</h1>
+  );
+};
+
+const SearchPanel = () => {
+  return (
+    <input placeholder="search"/>
+  );
+};
+
+const App = () => {
+  return (
+  <div>
+    <AppHeader />
+    <SearchPanel />
+    <TodoList />
+  </div>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
