@@ -20,14 +20,18 @@ export default class TodoListItem extends React.Component {
   };
 
   onLabelClick = () => {
-    this.setState({
-      done: true
+    this.setState((state) => {
+      return {
+        done: !state.done
+      }
     });
   };
 
   onMarkImportant = () => {
-    this.setState({
-      important: true
+    this.setState((state) => {
+      return {
+        important: !state.important
+      }
     });
   };
 
@@ -38,11 +42,12 @@ export default class TodoListItem extends React.Component {
     let classNames = 'todo-list-item';
     if (done) {
       classNames += ' done';
-    }
+    };
 
     if (important) {
       classNames += ' important';
-    }
+    };
+
     return (
       <span className= { classNames }>
         <span
