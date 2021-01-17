@@ -1,16 +1,54 @@
-const getResource = async (url) => {
-  const res = await fetch(url);
 
-  if (!res.ok) {
-    console.log(`Could not fetch ${url}, received ${res.status}`);
+class SwapiService {
+  _apiBase = 'https://swapi.dev/api';
+
+  async getResource(url) {
+    const res = await fetch(`${this._apiBase}${url}`);
+
+    if (!res.ok) {
+      console.log(`Could not fetch ${url}, received ${res.status}`);
+    };
+
+    const body = await res.json();
+
+    return body;
   };
 
-  const body = await res.json();
+  async getAllPeople() {
+    const res = await this.getResource('/people');
+    return res.results;
+  };
 
-  return body;
-}
+  getPerson(id) {
+    return this.getResource(`/people/${id}`);
+  };
 
+  async getAllPlanets() {
+    const res = await this.getResource('/planets');
+    return res.results;
+  };
 
-getResource('https://swapi.dev/api/people/112323123')
-  .then((body)=> console.log(body))
-  .catch((err) => console.log('Could not fetch', err));
+  getPlanet(id) {
+    return this.getResource(`/planets/${id}`);
+  };
+
+  async getAllStarships() {
+    const res = await this.getResource('/starships');
+    return res.results;
+  };
+
+  getStarship(id) {
+    return this.getResource(`/starships/${id}`);
+  };
+};
+
+const swapi = new SwapiService();
+
+swapi.getPerson(3)
+  .then((person) => console.log(person.name));
+
+swapi.getPlanet(3)
+  .then((person) => console.log(person.name));
+
+swapi.getStarship(3)
+  .then((person) => console.log(person.name));
