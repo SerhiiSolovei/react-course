@@ -40,14 +40,3 @@ export default class SwapiService {
     return this.getResource(`/starships/${id}`);
   };
 };
-
-const swapi = new SwapiService();
-
-swapi.getPerson(3)
-  .then((person) => console.log(person.name));
-
-swapi.getPlanet(3)
-  .then((person) => console.log(person.name));
-
-swapi.getStarship(3)
-  .then((person) => console.log(person.name));
