@@ -11,7 +11,7 @@ export default class App extends Component {
 
   state = {
     showRandomPlanet: true,
-    selectedPerson: 6
+    selectedPerson: null
   };
 
   toggleRandomPlanet = () => {
