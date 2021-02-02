@@ -11,6 +11,7 @@ import SwapiService from '../../services/swapi-service';
 import Row from '../row';
 
 import './app.css';
+import ErrorBoundary from '../error-boundary';
 
 export default class App extends Component {
 
@@ -46,7 +47,7 @@ export default class App extends Component {
       null;
 
 
-    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+    const { getPerson, getStarship, getPersonImage, getStarshipImage, getAllPeople, getAllStarships, getAllPlanets } = this.swapiService;
     const personDetails = (
       <ItemDetails
         itemId={11}
@@ -71,6 +72,7 @@ export default class App extends Component {
       </ItemDetails>
     );
     return (
+      <ErrorBoundary>
       <div className="stardb-app">
         <Header />
         {/* { planet }
@@ -87,32 +89,38 @@ export default class App extends Component {
         <PeoplePage /> */}
 
         {/* <div className="row mb2">
-          <div className="col-md-6">
+          <div className="col-md-6"> */}
             <ItemList
-              onItemSelected={this.onSelectedPerson}
-              getData={this.swapiService.getAllPlanets}
-              renderItem={(item) => item.name}/>
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={this.state.selectedPerson}/>
-          </div>
-        </div>
+              onItemSelected={() => {}}
+              getData={getAllPlanets}>
 
-        <div className="row mb2">
-          <div className="col-md-6">
+                {({name}) => <span>{name}</span>}
+            </ItemList>
+          {/* </div> */}
+          {/* <div className="col-md-6">
+            <PersonDetails personId={this.state.selectedPerson}/>
+          </div> */}
+        {/* </div> */}
+
+        {/* <div className="row mb2">
+          <div className="col-md-6"> */}
             <ItemList
-              onItemSelected={this.onSelectedPerson}
-              getData={this.swapiService.getAllStarships}
-              renderItem={(item) => item.name}/>
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={this.state.selectedPerson}/>
-          </div>
-        </div> */}
+              onItemSelected={() => {}}
+              getData={getAllStarships}>
 
-        <Row left={personDetails} right={starshipDetails}/>
+                {({name}) => <span>{name}</span>}
+            </ItemList>
+
+          {/* </div> */}
+          {/* <div className="col-md-6">
+            <PersonDetails personId={this.state.selectedPerson}/>
+          </div> */}
+        {/* </div> */}
+
+        {/* <Row left={personDetails} right={starshipDetails}/> */}
 
       </div>
+      </ErrorBoundary>
     );
   };
 };
