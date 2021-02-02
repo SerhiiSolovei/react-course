@@ -113,17 +113,12 @@ export default class App extends Component {
           <PlanetDetails itemId={2}/>
           <StarshipDetails itemId={9}/>
 
-          <PersonList>
-              {({name}) => <span>{name}</span>}
-          </PersonList>
+          <PersonList />
 
-          <StarshipList>
-              {({name}) => <span>{name}</span>}
-          </StarshipList>
+          <StarshipList />
 
-          <PlanetList>
-              {({name}) => <span>{name}</span>}
-          </PlanetList>
+          <PlanetList />
+
           {/* </div> */}
           {/* <div className="col-md-6">
             <PersonDetails personId={this.state.selectedPerson}/>
