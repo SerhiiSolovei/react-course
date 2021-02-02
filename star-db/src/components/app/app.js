@@ -10,6 +10,15 @@ import ItemDetails, { Record } from '../item-details/item-details';
 import SwapiService from '../../services/swapi-service';
 import Row from '../row';
 
+import {
+  PersonList,
+  PlanetList,
+  StarshipList,
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails } from '../sw-components';
+
+
 import './app.css';
 import ErrorBoundary from '../error-boundary';
 
@@ -90,12 +99,7 @@ export default class App extends Component {
 
         {/* <div className="row mb2">
           <div className="col-md-6"> */}
-            <ItemList
-              onItemSelected={() => {}}
-              getData={getAllPlanets}>
 
-                {({name}) => <span>{name}</span>}
-            </ItemList>
           {/* </div> */}
           {/* <div className="col-md-6">
             <PersonDetails personId={this.state.selectedPerson}/>
@@ -104,13 +108,22 @@ export default class App extends Component {
 
         {/* <div className="row mb2">
           <div className="col-md-6"> */}
-            <ItemList
-              onItemSelected={() => {}}
-              getData={getAllStarships}>
 
-                {({name}) => <span>{name}</span>}
-            </ItemList>
+          <PersonDetails itemId={11}/>
+          <PlanetDetails itemId={2}/>
+          <StarshipDetails itemId={9}/>
 
+          <PersonList>
+              {({name}) => <span>{name}</span>}
+          </PersonList>
+
+          <StarshipList>
+              {({name}) => <span>{name}</span>}
+          </StarshipList>
+
+          <PlanetList>
+              {({name}) => <span>{name}</span>}
+          </PlanetList>
           {/* </div> */}
           {/* <div className="col-md-6">
             <PersonDetails personId={this.state.selectedPerson}/>
