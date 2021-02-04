@@ -74,7 +74,7 @@ export default class ItemDetails extends Component {
       <div className="person-details card">
         {/* {spinner} */}
         <img className="person-image"
-          src={image} alt="person" />
+          src={image} alt="icon" />
 
         <div className="card-body">
           <h4>{name}</h4>
