@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 const UseEffect = () => {
-  const [ value, setValue ] = useState(0);
+  const [ value, setValue ] = useState(1);
   const [ visible, setVisible ] = useState(true);
 
   if (visible) {
@@ -23,28 +23,62 @@ const UseEffect = () => {
   }
 };
 
-const usePlanetInfo = (id) => {
+const getPlanet = (id) => {
+  return fetch(`https://swapi.dev/api/planets/${id}`)
+    .then((res) => res.json())
+    .then((data) => data);
+}
 
-  const [ planetName, setPlanetName ] = useState('Planet Name');
+const useRequest = (request) => {
+
+  const initialState = useMemo(()=> ({
+    data: null,
+    loading: true,
+    error: null
+  }), []);
+
+  const [ dataState, setDataState ] = useState(initialState);
 
   useEffect(()=> {
+    setDataState(initialState);
     let cancelled = false;
-    fetch(`https://swapi.dev/api/planets/${id}`)
-      .then((res) => res.json())
-      .then((data) => (id > 0 && !cancelled) && setPlanetName(data.name));
 
+    request()
+      .then(data => !cancelled && setDataState({
+        data,
+        loading: false,
+        error: null
+      }))
+      .catch(error => !cancelled && setDataState({
+        data: null,
+        loading: false,
+        error
+      }))
     return () => cancelled = true
-  }, [ id ]);
+  }, [ request, initialState ]);
 
-  return planetName
+  return dataState;
+};
+
+const usePlanetInfo = (id) => {
+  const request = useCallback(() => getPlanet(id), [id]);
+
+  return useRequest(request);
 };
 
 const PlanetInfo = ({id}) => {
 
-  const planetName = usePlanetInfo(id);
+  const { data, loading, error } = usePlanetInfo(id);
 
+  if (error) {
+    return <div>Something is wrong</div>
+  }
+
+  if (loading) {
+    return <div>loading...</div>
+  }
   return (
-    <div style={{padding: '10px'}}>{`${id} - ${planetName}`}</div>
+    <div style={{padding: '10px'}}>{`${id} - ${data.name}`}</div>
   );
 };
 
