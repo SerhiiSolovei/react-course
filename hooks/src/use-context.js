@@ -4,7 +4,7 @@ const MyContext = React.createContext();
 
 const UseContext = () => {
   return (
-    <MyContext.Provider value="Hello World!!!">
+    <MyContext.Provider value="How are you?">
       <Child />
     </MyContext.Provider>
   );
@@ -13,7 +13,7 @@ const UseContext = () => {
 const Child = () => {
   const value = useContext(MyContext);
 
-  return <p>{value}</p>
+  return <p style={{marginTop:'50px', marginBottom:'50px'}}>{value}</p>
 };
 
 export default UseContext;
