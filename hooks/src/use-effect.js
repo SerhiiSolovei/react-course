@@ -11,15 +11,34 @@ const UseEffect = () => {
           onClick={() => setValue((value) => value + 1)}>+</button>
         <button
           onClick={() => setVisible(false)}>hide</button>
-        <Notification />
-        {/* <ClassCounter value={value}/> */}
-        <HookCounter value={value}/>
+        <PlanetInfo id={value}/>
+        {/* <Notification />
+        <ClassCounter value={value}/>
+        <HookCounter value={value}/> */}
       </div>
     );
   } else {
     return <button
       onClick={() => setVisible(true)}>show</button>
   }
+};
+
+const PlanetInfo = ({id}) => {
+
+  const [ planetName, setPlanetName ] = useState('Planet Name');
+
+  useEffect(()=> {
+    let cancelled = false;
+    fetch(`https://swapi.dev/api/planets/${id}`)
+      .then((res) => res.json())
+      .then((data) => (id > 0 && !cancelled) && setPlanetName(data.name));
+
+    return () => cancelled = true
+  }, [ id ]);
+
+  return (
+    <div style={{padding: '10px'}}>{`${id} - ${planetName}`}</div>
+  );
 };
 
 const Notification = () => {
@@ -69,5 +88,6 @@ class ClassCounter extends React.Component {
     return <p>{this.props.value}</p>
   };
 };
+
 
 export default UseEffect;
