@@ -5,17 +5,31 @@ const reducer = (state = 0, action) => {
   switch (action.type) {
     case 'INC':
       return state + 1;
+
+    case 'DEC':
+      return state - 1;
+
     default:
       return state;
   };
 };
 
 const store = createStore(reducer);
-//store.subscribe(fn) - it will be called any time an action is dispatched
-store.subscribe(() => {
-  console.log(store.getState()); // store.getState() - using for read the current state
+//store.subscribe(fn) - it will be called any time an action is dispatched and using for update UI
+// store.getState() - using for read the current state
+// store.dispatch(action) - handling new action
+
+document.getElementById('inc').addEventListener('click', () => {
+  store.dispatch({type: 'INC'});
 });
 
-store.dispatch({type: 'INC'}); // store.dispatch(action) - handling new action
-store.dispatch({type: 'INC'});
-store.dispatch({type: 'INC'});
+document.getElementById('dec').addEventListener('click', () => {
+  store.dispatch({type: 'DEC'});
+});
+
+const update = () => {
+  document.getElementById('counter')
+    .innerHTML = store.getState();
+};
+
+store.subscribe(update);
