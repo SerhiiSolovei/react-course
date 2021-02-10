@@ -1,33 +1,12 @@
 import { createStore }  from 'redux';
-
-const reducer = (state = 0, action) => {
-
-  switch (action.type) {
-    case 'RND':
-      return state + action.payload;
-
-    case 'INC':
-      return state + 1;
-
-    case 'DEC':
-      return state - 1;
-
-    default:
-      return state;
-  };
-};
-
+import { inc, dec, rnd } from './actions';
+import reducer from './reducer';
 
 const store = createStore(reducer);
 //store.subscribe(fn) - it will be called any time an action is dispatched and using for update UI
 // store.getState() - using for read the current state
 // store.dispatch(action) - handling new action
 
-const inc = () => ({type: 'INC'});
-const dec = () => ({type: 'DEC'});
-const rnd = (payload) => ({type: 'RND', payload});
-
-console.log(rnd);
 document.getElementById('inc').addEventListener('click', () => {
   store.dispatch(inc());
 });
@@ -37,7 +16,7 @@ document.getElementById('dec').addEventListener('click', () => {
 });
 
 document.getElementById('rnd').addEventListener('click', () => {
-  const payload = Math.floor(Math.random()*10);
+  const payload = Math.floor(Math.random()*10 + 1);
   store.dispatch(rnd(payload));
 });
 
