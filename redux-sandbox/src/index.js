@@ -1,5 +1,5 @@
-import { createStore }  from 'redux';
-import { inc, dec, rnd } from './actions';
+import { createStore, bindActionCreators }  from 'redux';
+import * as actions from './actions';
 import reducer from './reducer';
 
 const store = createStore(reducer);
@@ -7,17 +7,21 @@ const store = createStore(reducer);
 // store.getState() - using for read the current state
 // store.dispatch(action) - handling new action
 
-document.getElementById('inc').addEventListener('click', () => {
-  store.dispatch(inc());
-});
+const { dispatch } = store;
 
-document.getElementById('dec').addEventListener('click', () => {
-  store.dispatch(dec());
-});
+//const bindActionCreator = (creator, dispatch) => (...args) => {
+//   dispatch(creator(...args));
+// }; // simple example of working bindActionCreators function
+
+const { inc, dec, rnd } = bindActionCreators(actions, dispatch);
+
+document.getElementById('inc').addEventListener('click', inc);
+
+document.getElementById('dec').addEventListener('click', dec);
 
 document.getElementById('rnd').addEventListener('click', () => {
   const payload = Math.floor(Math.random()*10 + 1);
-  store.dispatch(rnd(payload));
+  rnd(payload);
 });
 
 const update = () => {
