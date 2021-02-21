@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import BookListItem from '../book-list-item';
 import Spinner from '../spinner'
 import { withBookstoreService } from '../hoc';
+import { bindActionCreators } from 'redux';
 import { fetchBooks, bookAddedToCart } from '../../actions';
 import ErrorIndicator from '../error-indicator';
 import { compose } from '../../utils';
@@ -57,10 +58,10 @@ const mapStateToProps = ({ bookList }) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { bookstoreService } = ownProps;
-  return {
-    fetchBooks: fetchBooks(bookstoreService, dispatch),
-    bookAddedToCart: (id) => dispatch(bookAddedToCart(id))
-  }
+  return bindActionCreators({
+    fetchBooks: fetchBooks(bookstoreService),
+    bookAddedToCart: bookAddedToCart
+  }, dispatch)
 };
 
 export default compose(
