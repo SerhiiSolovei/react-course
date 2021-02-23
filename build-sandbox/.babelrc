@@ -11,8 +11,8 @@
         "last 2 firefox versions",
         "last 1 edge versions"
       ]
-    }
-    ]],
+    }],
+    "@babel/react"],
   "plugins": [
     "@babel/proposal-class-properties"
   ]
