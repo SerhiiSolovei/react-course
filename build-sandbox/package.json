@@ -16,5 +16,8 @@
     "@babel/plugin-transform-classes": "^7.12.13",
     "@babel/plugin-transform-template-literals": "^7.12.13",
     "@babel/preset-env": "^7.13.0"
+  },
+  "dependencies": {
+    "core-js": "^3.9.0"
   }
 }

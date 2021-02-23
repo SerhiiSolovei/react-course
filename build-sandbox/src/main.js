@@ -1,6 +1,7 @@
 class App {
   run = async (name) => {
     console.log(`Hello ${name}`);
+    console.log([1,2,3,[4,5]].flat());
   };
 };
 
