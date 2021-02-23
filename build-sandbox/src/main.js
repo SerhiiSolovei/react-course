@@ -1,6 +1,5 @@
 class App {
-
-  run (name) {
+  run = (name) => {
     console.log(`Hello ${name}`);
   };
 };
