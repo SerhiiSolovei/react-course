@@ -15,6 +15,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './main.css';
 
 const App = () => {
   return <p>Hello World!</p>

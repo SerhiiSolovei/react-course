@@ -5,6 +5,7 @@ module.exports = {
   module: {
     rules: [
 
+      // Babel loader
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -36,6 +37,15 @@ module.exports = {
             name: '[name].[ext]'
           }
         }]
+      },
+
+      // CSS loader
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' }
+        ]
       }
     ]
   }
